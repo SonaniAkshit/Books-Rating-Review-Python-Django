@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>BookSaw - Add Book</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+	body {
+		overflow-x: hidden; /* Prevent horizontal scroll */
+	}
+
+</style>
+<body style="background-color: #F3F2EC;">
+
+    <div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-youtube-play"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-behance-square"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							{% if request.session.email %}
+								<a href="{% url 'profile' %}" class="user-account for-buy"><i
+										class="icon icon-user"></i><span>Account</span></a>
+							{% else %}
+								<a href="{% url 'signin' %}" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Login</span></a>
+							{% endif %}
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'images/main-logo.png' %}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item"><a href="{% url 'index' %}">Home</a></li>
+									<li class="menu-item has-sub">
+										<a href="#pages" class="nav-link">Pages</a>
+
+										<ul>
+											<li><a href="{% url 'add_book' %}">Add Book</a></li>
+											<li class="active" ><a href="{% url 'manage_book' %}">Manage Book</a></li>
+											<li><a href="{% url 'thankyou' %}">Thank You</a></li>
+										</ul>
+
+									</li>
+									<li class="menu-item"><a href="#featured-books" class="nav-link"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+							
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+    <div class="container mt-5">
+        <h2>Books List</h2>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Book Image</th> <!-- New column for Image -->
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample rows; replace with dynamic data -->
+                {% for i in Book %}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>   
+                    <img src=" {{ i.book_image.url }}" alt="The Great Gatsby" width="50" height="50">
+                    </td>
+                    <td>{{i.book_name}}</td>
+                    <td>{{i.book_author}}</td>
+                    <td>{{i.book_price}}</td>
+                    <td>
+                        <a href="{% url 'edit' i.id %}"><button type="submit" class="btn btn-warning btn-sm">Edit</button></a>
+                        <a href="{% url 'delete' i.id %}" onclick="return confirm('Are you sure you want to delete this user?');"><button type="submit" class="btn btn-danger btn-sm">Delete</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    {% for msg in messages %}
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        let iconType = "{{ msg.tags }}";  
+
+        Toast.fire({
+            icon: iconType,
+            title: "{{ msg }}"
+        });
+    </script>
+    {% endfor %}    
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+</body>
+</html>
