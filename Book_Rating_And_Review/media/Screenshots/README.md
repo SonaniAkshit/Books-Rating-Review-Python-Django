@@ -15,6 +15,12 @@
 ## Book List
 ![Book List](books.png)
 
+## Add Review
+![Book List](Add%20Review.png)
+
+## Book Reviews
+![Book List](reviews.png)
+
 ## Add Books
 ![Home Page](addbook.png)
 
