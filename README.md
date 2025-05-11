@@ -29,7 +29,7 @@ Welcome to the **Book Rating and Review System**, a Django-based web application
 ![Home Page](Book_Rating_And_Review/media/Screenshots/home.png)
 
 ### Show More
->[More Screenshots...](https://github.com/SonaniAkshit/Bookstore-JspServlet/tree/main/BookStore/web/images/screenshots/README.md)
+>[More Screenshots...](https://github.com/SonaniAkshit/Books-Rating-Review-Python-Django/tree/main/Book_Rating_And_Review/media/Screenshots/README.md)
 
 
 ## ⚙️ Setup Instructions
@@ -93,3 +93,11 @@ Book_Rating_And_Review/
 ├── manage.py
 └── db.sqlite3
 ```
+
+## 📧 Contact
+- **Developer:** Akshit Sonani
+- **Email:** sonaniakshit684.com
+- **GitHub:** [SonaniAkshit](https://github.com/SonaniAkshit)
+
+# 🔥 Happy Coding! 🚀
+### ⭐ Star this repository if you find it helpful!
